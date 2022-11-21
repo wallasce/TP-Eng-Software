@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Pedagio {
 	protected ArrayList<Recibo> recibos;
 	protected ArrayList<Usuario> usuarios;
-	protected float valorAcumlado; 
+	protected double valorAcumlado; 
 	protected Cancela cancela;
 	
 	public Pedagio() {
@@ -25,13 +25,29 @@ public class Pedagio {
 		// Fazer algum codigo de simulacao de envio a PRF
 	}
 	
-	private String buscarTipoVeiculo(String Placa) {
+	private int buscarTipoVeiculo(String Placa) {
 		for (int i = 0; i < this.usuarios.size(); i++ ) {
 			if (Placa == this.usuarios.get(i).veiculo.getPlaca()) {
 				return this.usuarios.get(i).veiculo.getModelo();
 			}
 		}
-		return "ERRO";
+		return 0;
+	}
+	
+	private double calculaTarifa(int modeloVeiculo) {
+		switch (modeloVeiculo) {
+			case 1: return 5.20;
+			case 2: return 10.40;
+			case 3: return 7.80;
+			case 4: return 15.60;
+			case 5: return 10.40;
+			case 6: return 20.80;
+			case 7: return 26.00;
+			case 8: return 31.20;
+			case 9: return 2.60;
+			case 10: return 0;
+			default: return -1;
+		}
 	}
 	
 	public void executar() {
@@ -39,7 +55,7 @@ public class Pedagio {
 			//dormir ate receber uma placa?
 			String placa = "XXX-XXXX";
 			
-			String tipoVeiculo = this.buscarTipoVeiculo(placa);
+			double valorCobrar = this.calculaTarifa(this.buscarTipoVeiculo(placa)); 
 		}
 	}
 }
