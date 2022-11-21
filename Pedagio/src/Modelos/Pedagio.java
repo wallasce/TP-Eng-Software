@@ -25,16 +25,21 @@ public class Pedagio {
 		// Fazer algum codigo de simulacao de envio a PRF
 	}
 	
-	private String getTipoVeiculo(String Placa) {
+	private String buscarTipoVeiculo(String Placa) {
 		for (int i = 0; i < this.usuarios.size(); i++ ) {
-			String placaCorrente = this.usuarios.get(i).veiculo.getPlaca();
-			if (Placa == placaCorrente) {
-				return placaCorrente;
+			if (Placa == this.usuarios.get(i).veiculo.getPlaca()) {
+				return this.usuarios.get(i).veiculo.getModelo();
 			}
 		}
 		return "ERRO";
 	}
 	
-	
-	
+	public void executar() {
+		while(true) {
+			//dormir ate receber uma placa?
+			String placa = "XXX-XXXX";
+			
+			String tipoVeiculo = this.buscarTipoVeiculo(placa);
+		}
+	}
 }
