@@ -25,13 +25,13 @@ public class Pedagio {
 		// Fazer algum codigo de simulacao de envio a PRF
 	}
 	
-	private int buscarTipoVeiculo(String Placa) {
+	private Usuario buscarUsuario(String Placa) {
 		for (int i = 0; i < this.usuarios.size(); i++ ) {
 			if (Placa == this.usuarios.get(i).veiculo.getPlaca()) {
-				return this.usuarios.get(i).veiculo.getModelo();
+				return this.usuarios.get(i);
 			}
 		}
-		return 0;
+		return null;
 	}
 	
 	private double calculaTarifa(int modeloVeiculo) {
@@ -54,8 +54,22 @@ public class Pedagio {
 		while(true) {
 			//dormir ate receber uma placa?
 			String placa = "XXX-XXXX";
+			//Trocar para buscar Usuario, precisa usar varios atributos dele.
 			
-			double valorCobrar = this.calculaTarifa(this.buscarTipoVeiculo(placa)); 
+			Usuario usuario = this.buscarUsuario(placa);
+			double valorCobrar = this.calculaTarifa(usuario.veiculo.getModelo()); 
+			
+			//usuario.cobrar(valorCobrar);
+			this.valorAcumlado += valorCobrar;
+			this.cancela.abrirCancela();
+			// Confirmacao que carro passou
+			this.cancela.fecharCancela();
+			
+			if (this.consultarPRF(placa)) {
+				this.notificarPRF("Documento Atrasado.", placa);
+			}
+			
+			recibos.add(new Recibo(valorCobrar, placa));
 		}
 	}
 }
