@@ -1,10 +1,10 @@
 package Modelos;
 
 public class Veiculo {
-	private String modelo;
+	private int modelo;
 	private String placa;
 	
-	public Veiculo(String modelo, String placa) {
+	public Veiculo(int modelo, String placa) {
 		this.modelo = modelo;
 		this.placa = placa;
 	}
@@ -13,7 +13,7 @@ public class Veiculo {
 		this.placa = placa;
 	}
 	
-	public String getModelo() {
+	public int getModelo() {
 		return this.modelo;
 	}
 	

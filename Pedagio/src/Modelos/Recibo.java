@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Recibo {
-	private float valor;
+	private double valor;
 	private String data;
 	private String placa;
 	
-	Recibo(float valor, String placa) {
+	Recibo(double valor, String placa) {
 		this.valor = valor;
 		this.placa = placa;
 		
@@ -17,7 +17,7 @@ public class Recibo {
 		this.data = formatoData.format(new Date());
 	}
 	
-	public float getValor() {
+	public double getValor() {
 		return this.valor;
 	}
 	

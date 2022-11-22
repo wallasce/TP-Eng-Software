@@ -15,7 +15,7 @@ public abstract class Usuario {
 		return this.veiculo.getPlaca();
 	}
 	
-	public String ConsultarTipoVeiculo() {
+	public int ConsultarTipoVeiculo() {
 		return this.veiculo.getModelo();
 	}
 }
