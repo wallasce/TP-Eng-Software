@@ -5,24 +5,24 @@ import java.util.ArrayList;
 public class Pedagio {
 	protected ArrayList<Recibo> recibos;
 	protected ArrayList<Usuario> usuarios;
+	protected boolean alerta;
 	protected double valorAcumlado; 
 	protected Cancela cancela;
 	
 	public Pedagio() {
+		this.cancela = new Cancela();
 		this.recibos = new ArrayList<Recibo>();
 		this.usuarios = new ArrayList<Usuario>();
 		this.valorAcumlado = 0;
-		
-		// Talvez Carregar um JSON?
 	}
 	
 	private Boolean consultarPRF(String placa) {
-		// Fazer algum codigo de simulacao de consulta a PRF
+		// Simularia uma consulta a API da PRF
 		return false;
 	}
 	
 	private void notificarPRF(String causa, String placa) {
-		// Fazer algum codigo de simulacao de envio a PRF
+		// Simula o envio de uma notificação a PRF
 	}
 	
 	private Usuario buscarUsuario(String Placa) {
@@ -52,24 +52,28 @@ public class Pedagio {
 	
 	public void executar() {
 		while(true) {
-			//dormir ate receber uma placa?
+			this.alerta = false;
+			
+			// Linha abaixo receberia uma placa.
 			String placa = "XXX-XXXX";
-			//Trocar para buscar Usuario, precisa usar varios atributos dele.
-			
-			Usuario usuario = this.buscarUsuario(placa);
-			double valorCobrar = this.calculaTarifa(usuario.veiculo.getModelo()); 
-			
-			//usuario.cobrar(valorCobrar);
-			this.valorAcumlado += valorCobrar;
-			this.cancela.abrirCancela();
-			// Confirmacao que carro passou
-			this.cancela.fecharCancela();
 			
 			if (this.consultarPRF(placa)) {
 				this.notificarPRF("Documento Atrasado.", placa);
 			}
 			
-			recibos.add(new Recibo(valorCobrar, placa));
+			Usuario usuario = this.buscarUsuario(placa);
+			double valorCobrar = this.calculaTarifa(usuario.veiculo.getModelo()); 
+			
+			if (usuario.cobrar(valorCobrar)) {
+				this.valorAcumlado += valorCobrar;
+				this.cancela.abrirCancela();
+				// Confirmacao que carro passou
+				this.cancela.fecharCancela();
+				recibos.add(new Recibo(valorCobrar, placa));
+			} else {
+				this.alerta = true;
+				//Ação manual necessaria
+			}
 		}
 	}
 }
