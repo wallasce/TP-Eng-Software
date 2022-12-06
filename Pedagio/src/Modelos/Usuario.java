@@ -18,4 +18,6 @@ public abstract class Usuario {
 	public int ConsultarTipoVeiculo() {
 		return this.veiculo.getModelo();
 	}
+	
+	public abstract boolean cobrar(double valor);
 }
