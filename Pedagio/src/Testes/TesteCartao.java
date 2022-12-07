@@ -11,7 +11,7 @@ import Modelos.Cartao;
 class TesteCartao {
 
 	@Test
-	void testeRealizarCobrança() {
+	public void testeRealizarCobrança() {
 		Cartao cartao = new Cartao(12345, new Date(), 123);
 		
 		assertTrue("Deve retornar que a cobrança foi feita", cartao.realizarCobranca(25.50));

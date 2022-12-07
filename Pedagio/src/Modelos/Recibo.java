@@ -9,7 +9,7 @@ public class Recibo {
 	private String data;
 	private String placa;
 	
-	Recibo(double valor, String placa) {
+	public Recibo(double valor, String placa) {
 		this.valor = valor;
 		this.placa = placa;
 		
