@@ -26,4 +26,8 @@ public class SmartCard {
 			return false;
 		}
 	}
+	
+	public double getSaldo() {
+		return this.saldo;
+	}
 }
