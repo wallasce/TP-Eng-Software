@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import Modelos.SmartCard;
 
 class TestSmartCard {
-
 	@Test
 	void testSaldoAoCarregarCartao() {
 		SmartCard cartao = new SmartCard(123);
@@ -42,5 +41,4 @@ class TestSmartCard {
 		
 		assertFalse("Debito deve ser feito", cartao.debitar(70.25));
 	}
-
 }
